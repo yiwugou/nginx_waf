@@ -1,3 +1,7 @@
+### 该插件依赖openresty,具体安装方法网上找找
+
+### 复制nginx_waf/* 到 /usr/local/openresty/nginx/conf/waf/*
+
 ### 在 nginx.conf 的 http 段添加
 ```
 lua_package_path "/usr/local/openresty/lualib/?.lua;/usr/local/openresty/nginx/conf/waf/?.lua";
