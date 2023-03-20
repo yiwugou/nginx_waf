@@ -227,9 +227,7 @@ function check_cookie()
     return false
 end
 
-function check_cc(cc_count, cc_seconds)
-    local uri = ngx.var.uri
-    local token = getClientIp()..'_'..uri
+function check_cc(cc_count, cc_seconds, token)
     local limit_cache = ngx.shared.limit_cache
     local req,_ = limit_cache:get(token)
     if req then
@@ -244,6 +242,16 @@ function check_cc(cc_count, cc_seconds)
         limit_cache:set(token, 1, cc_seconds)
     end
     return false
+end
+
+function check_cc_ip(cc_count, cc_seconds)
+    local token = getClientIp()
+    return check_cc(cc_count, cc_seconds, token);
+end
+
+function check_cc_uri(cc_count, cc_seconds)
+    local token = getClientIp()..'_'..ngx.var.uri
+    return check_cc(cc_count, cc_seconds, token);
 end
 
 function check_scan_header() -- 常用扫描器

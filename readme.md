@@ -21,7 +21,8 @@ access_by_lua '
     elseif check_query() then
     elseif check_post_args() then
     elseif check_cookie() then   
-    elseif check_cc(10, 60) then 
+    elseif check_cc_ip(100, 60) then 
+    elseif check_cc_uri(10, 60) then 
     else
         return
     end
